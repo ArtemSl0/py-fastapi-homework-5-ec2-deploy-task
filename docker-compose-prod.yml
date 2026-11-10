@@ -92,7 +92,7 @@ services:
       - theater_network
 
   minio:
-    image: minio/minio:latest
+    image: docker.io/pgsty/silo:RELEASE.2026-08-06T00-00-00Z
     container_name: minio-theater
     command: server --console-address ":9001" /data
     ports:
@@ -103,7 +103,7 @@ services:
     volumes:
       - minio_data:/data
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:9000/minio/health/live" ]
+      test: test: [ "CMD", "silo", "healthcheck", "ready" ]
       interval: 10s
       timeout: 5s
       retries: 5
